@@ -16,8 +16,7 @@
 * **Gameplay/Rule**: <br>
 
   The game offers **Single Player** and **Multiplayer modes**.
- <br>
-In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
+ <br> In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
 **Multiplayer** Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork. <br>
 <br>
 **Scoring:** Points are awarded based on the number of dishes completed. <br>
