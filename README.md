@@ -13,8 +13,8 @@
 
 ### 2.1 Konsep Game
 * **Genre**: RPG, Adventure
-* **Gameplay/Rule**: 
-* **Objective**: Kill Monsters and Survive to proceed to the next stage
+* **Gameplay/Rule**: Kill Monsters and Survive to proceed to the next stage
+* **Objective**: Go to the next stage
 * **Single/Multi Player**: Single Player
 
 ### 2.2 Fitur Utama
