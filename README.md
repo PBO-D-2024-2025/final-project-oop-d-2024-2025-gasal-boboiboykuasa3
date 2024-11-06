@@ -4,9 +4,9 @@
 ## 1. Informasi Umum
 * **Nama Game**: [Nama Game]
 * **Anggota Kelompok**:
-    1. [Nama - NRP]
-    2. [Nama - NRP]
-    3. [Nama - NRP]
+    1. Nixon Castroman - 5025231024
+    2. Dustin Felix - 5025231046
+    3. Daffano - NRP
     4. [Nama - NRP]
 * **Tech Stack**: [Bahasa Pemrograman, Framework, Tools yang digunakan]
 
