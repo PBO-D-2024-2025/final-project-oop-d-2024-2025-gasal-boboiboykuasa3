@@ -16,10 +16,9 @@
 * **Gameplay/Rule**: <br>
 
   The game offers **Single Player** and **Multiplayer modes**.
-  <br>
  <br>
-    - In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
-    -**Multiplayer** Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork. <br>
+  In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
+**Multiplayer** Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork. <br>
 <br>
 **Scoring:** Points are awarded based on the number of dishes completed. <br>
 <br>
@@ -28,9 +27,9 @@
 Different difficulty levels could introduce more complex recipes <br>
 <br>
 **Difficulty Levels:** <br>
-    -**Easy:** More time, simpler recipes. <br>
-    -**Medium:** Moderate time, recipes with more steps. <br>
-    -**Hard:** Less time, more complex recipes. <br>
+    **Easy:** More time, simpler recipes. <br>
+    **Medium:** Moderate time, recipes with more steps. <br>
+    **Hard:** Less time, more complex recipes. <br>
 
 * **Objective**: Cook as much dishes as possible based on the given recipe until the time is up. <br>
 
