@@ -41,10 +41,10 @@ Different difficulty levels could introduce more complex recipes <br>
 ### 3.1 Save/Load System
 * **Implementasi**:
   Save highest score on each difficulty
-* **Konsep OOP**:
+* **Konsep OOP**:<br>
   **Encapsulation**: The high scores for each difficulty level are stored within the **GameData** class, keeping this data private and only accessible through specific methods.
-* **Penerapan SOLID**:
-  **Single Responsibility Principle (SRP)** : SaveSystem only handles saving and loading data without handling game logic.
+* **Penerapan SOLID**:<br>
+  **Single Responsibility Principle (SRP)** : SaveSystem only handles saving and loading data without handling game logic.<br>
   **Open/Closed Principle (OCP)** : SaveSystem can be extended for different storage formats (like cloud or database storage) without modifying its core methods.
 * **Design Pattern yang Digunakan**:
 * **Code Snippet**:
@@ -92,15 +92,15 @@ def main():
 * **Jenis Achievement**:
     1. High Score Hard Level: Awarded when the player scores at least 10 points in Hard level.
     2. Multiplayer Score Goal: Awarded when the player scores at least 20 points in Multiplayer mode.
-* **Konsep OOP**:
+* **Konsep OOP**:<br>
   **Encapsulation**: Each achievement is responsible for managing its own criteria and tracking whether it is unlocked, encapsulating behavior within specific classes.
-  **Inheritance**: Different achievements inherit from the Achievement base class, sharing properties and methods while allowing specific criteria implementations.
-  **Polymorphism**: By overriding CheckCriteria, each achievement implements custom behavior for checking score-based conditions.
+  <br>**Inheritance**: Different achievements inherit from the Achievement base class, sharing properties and methods while allowing specific criteria implementations.
+  <br>**Polymorphism**: By overriding CheckCriteria, each achievement implements custom behavior for checking score-based conditions.
 * **Penerapan SOLID**:
-  **Open/Closed Principle (OCP)**: New achievements can be added as subclasses without modifying the base class, making the system extensible.
-  **Liskov Substitution Principle (LSP)**: Any specific achievement class (e.g., HighScoreHardLevel) can replace the Achievement base class without affecting the AchievementManager.c
-  **Interface Segregation Principle (ISP)**: If you were to have separate interfaces for achievements based on score, multiplayer, etc., you would implement only relevant interfaces.
-  **Dependency Inversion Principle (DIP)**: The AchievementManager depends on abstractions (the Achievement class) rather than concrete implementations, allowing flexibility.
+ <br> **Open/Closed Principle (OCP)**: New achievements can be added as subclasses without modifying the base class, making the system extensible.
+  <br>**Liskov Substitution Principle (LSP)**: Any specific achievement class (e.g., HighScoreHardLevel) can replace the Achievement base class without affecting the AchievementManager.c
+  <br>**Interface Segregation Principle (ISP)**: If you were to have separate interfaces for achievements based on score, multiplayer, etc., you would implement only relevant interfaces.
+  <br>**Dependency Inversion Principle (DIP)**: The AchievementManager depends on abstractions (the Achievement class) rather than concrete implementations, allowing flexibility.
 * **Design Pattern yang Digunakan**:
 * **Code Snippet**:
 ```
