@@ -13,9 +13,22 @@
 
 ### 2.1 Konsep Game
 * **Genre**: Cooking
-* **Gameplay/Rule**: Players will have to cook the dishes within the given time
-* **Objective**: Cook all the dishes in time
-* **Single/Multi Player**: Single Player
+* **Gameplay/Rule**:
+  The game offers Single Player and Multiplayer modes.
+In Single Player, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits.
+Multiplayer Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork.
+Scoring: Points are awarded based on the number of dishes completed.
+Recipe System:
+Each dish has a recipe that includes specific ingredients and steps (e.g., chopped vegetables, fried meat, boiled pasta).
+Different difficulty levels could introduce more complex recipes
+Difficulty Levels:
+Easy: More time, simpler recipes.
+Medium: Moderate time, recipes with more steps.
+Hard: Less time, more complex recipes.
+
+* **Objective**: Cook as much dishes as possible based on the given recipe until the time is up.
+
+* **Single/Multi Player**: Both
 
 ### 2.2 Fitur Utama
 1. [Fitur 1]
