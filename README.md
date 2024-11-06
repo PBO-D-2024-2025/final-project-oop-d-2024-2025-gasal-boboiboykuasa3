@@ -2,7 +2,7 @@
 # Laporan Akhir Final Project OOP D
 
 ## 1. Informasi Umum
-* **Nama Game**: Solo Levelling
+* **Nama Game**: Cooking Duck
 * **Anggota Kelompok**:
     1. Nixon Castroman - 5025231024
     2. Dustin Felix - 5025231046
@@ -12,9 +12,9 @@
 ## 2. Deskripsi Game
 
 ### 2.1 Konsep Game
-* **Genre**: RPG, Adventure
-* **Gameplay/Rule**: Kill Monsters and Survive to proceed to the next stage
-* **Objective**: Go to the next stage
+* **Genre**: Cooking
+* **Gameplay/Rule**: Players will have to cook the dishes within the given time
+* **Objective**: Cook all the dishes in time
 * **Single/Multi Player**: Single Player
 
 ### 2.2 Fitur Utama
