@@ -6,7 +6,7 @@
 * **Anggota Kelompok**:
     1. Nixon Castroman - 5025231024
     2. Dustin Felix - 5025231046
-    3. Daffano - NRP
+    3. Daffano Abyan Zakyanto Azmy- 5025231249
     4. [Nama - NRP]
 * **Tech Stack**: [Bahasa Pemrograman, Framework, Tools yang digunakan]
 
