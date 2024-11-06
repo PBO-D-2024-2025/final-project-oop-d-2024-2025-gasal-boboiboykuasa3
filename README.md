@@ -14,19 +14,19 @@
 ### 2.1 Konsep Game
 * **Genre**: Cooking
 * **Gameplay/Rule**:
-  The game offers Single Player and Multiplayer modes.
-In Single Player, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits.
-Multiplayer Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork.
-Scoring: Points are awarded based on the number of dishes completed.
-Recipe System:
+  The game offers **Single Player** and **Multiplayer modes**. <br>
+In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
+**Multiplayer** Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork. <br>
+**Scoring:** Points are awarded based on the number of dishes completed. <br>
+**Recipe System:** <br>
 Each dish has a recipe that includes specific ingredients and steps (e.g., chopped vegetables, fried meat, boiled pasta).
-Different difficulty levels could introduce more complex recipes
-Difficulty Levels:
-Easy: More time, simpler recipes.
-Medium: Moderate time, recipes with more steps.
-Hard: Less time, more complex recipes.
+Different difficulty levels could introduce more complex recipes <br>
+**Difficulty Levels:** <br>
+**Easy:** More time, simpler recipes. <br>
+**Medium:** Moderate time, recipes with more steps. <br>
+**Hard:** Less time, more complex recipes. <br>
 
-* **Objective**: Cook as much dishes as possible based on the given recipe until the time is up.
+* **Objective**: Cook as much dishes as possible based on the given recipe until the time is up. <br>
 
 * **Single/Multi Player**: Both
 
