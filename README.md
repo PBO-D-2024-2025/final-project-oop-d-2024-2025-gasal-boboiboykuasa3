@@ -2,7 +2,7 @@
 # Laporan Akhir Final Project OOP D
 
 ## 1. Informasi Umum
-* **Nama Game**: Cooking Duck
+* **Nama Game**: Gosong Cooking
 * **Anggota Kelompok**:
     1. Nixon Castroman - 5025231024
     2. Dustin Felix - 5025231046
@@ -32,52 +32,105 @@
 
 ### 3.1 Save/Load System
 * **Implementasi**:
-  Save highest score that the player gets
+  Memberikan Highest Score
 * **Konsep OOP**:<br>
-  **Encapsulation**: The high scores for each difficulty level are stored within the **GameData** class, keeping this data private and only accessible through specific methods.
+  - Encapsulation <br>
+    Detail implementasi seperti pengaturan teks untuk tampilan skor akhir dan skor tertinggi (recipesDeliveredText, highScoreText) hanya dapat diakses di dalam kelas. Metode seperti Show dan Hide juga digunakan     untuk mengatur visibilitas UI tanpa mengekspos detail implementasi ke luar.
+    ```
+    [SerializeField] private TextMeshProUGUI recipesDeliveredText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    
+    private void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+    ```
+ - Abstraction <br>
+   Kelas ini menyembunyikan logika bagaimana data skor saat ini (currentScore) diperoleh dari DeliveryManager atau bagaimana skor tertinggi dikelola menggunakan PlayerPrefs. Pengembang hanya berinteraksi dengan     kelas ini melalui event KitchenGameManager_OnStateChanged.
+   ```
+    int currentScore = DeliveryManager.Instance.GetSuccessfulRecipesAmount();
+    int highScore = PlayerPrefs.GetInt("HighScore", 0);
+    
+    if (currentScore > highScore)
+    {
+        highScore = currentScore;
+        PlayerPrefs.SetInt("HighScore", highScore);
+        PlayerPrefs.Save();
+    }
+
+   ```
+   
 * **Penerapan SOLID**:<br>
-  **Single Responsibility Principle (SRP)** : SaveSystem only handles saving and loading data without handling game logic.<br>
-  **Open/Closed Principle (OCP)** : SaveSystem can be extended for different storage formats (like cloud or database storage) without modifying its core methods.
+  - Single Responsibility Principle (SRP)
+    Kelas ini hanya bertanggung jawab untuk mengatur tampilan layar akhir permainan. Hal ini mencakup menampilkan skor saat ini dan skor tertinggi, serta mengatur visibilitas layar.
+    Logika penghitungan skor dan manajemen state game ditangani oleh DeliveryManager dan KitchenGameManager.
+  
 * **Design Pattern yang Digunakan**:
 * **Code Snippet**:
 ```
-import json
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
 
+public class GameOverUI : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI recipesDeliveredText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
 
-highscore_file = 'highscores.json'
+    private void Start()
+    {
+        KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
 
+        Hide();
 
-class HighscoreLoader:
-    def load(self):
-        try:
-            with open(highscore_file, 'r') as file:
-                return json.load(file)
-        except FileNotFoundError:
-            return {'easy': 0, 'medium': 0, 'hard': 0}
+    }
 
+    private void KitchenGameManager_OnStateChanged(object sender, System.EventArgs e)
+    {
+        if (KitchenGameManager.Instance.IsGameOver())
+        {
+            Show();
+            int currentScore = DeliveryManager.Instance.GetSuccessfulRecipesAmount();
+            recipesDeliveredText.text = currentScore.ToString();
 
-class HighscoreSaver:
-    def save(self, highscores):
-        with open(highscore_file, 'w') as file:
-            json.dump(highscores, file)
+            
+            int highScore = PlayerPrefs.GetInt("HighScore",0);
 
+           
+            if (currentScore > highScore)
+            {
+                highScore = currentScore;
+                PlayerPrefs.SetInt("HighScore", highScore);
+                PlayerPrefs.Save();
+            }
 
-class HighscoreUpdater:
-    def __init__(self, loader, saver):
-        self.loader = loader
-        self.saver = saver
+            
+            highScoreText.text = highScore.ToString();
 
+        }
+        else
+        {
+            Hide();
+        }
+    }
 
-    def update_highscore(self, difficulty, score):
-        highscores = self.loader.load()
-        highscores[difficulty] = max(highscores[difficulty], score)
-        self.saver.save(highscores)
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
 
+    private void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+}
 
-def main():
-    loader = HighscoreLoader()
-    saver = HighscoreSaver()
-    updater = HighscoreUpdater(loader, saver)
 ```
 
 ### 3.2 Achievement System
@@ -127,12 +180,12 @@ achievementManager.EvaluateAchievements(currentSession);
 ### 4.1 Fitur
 * **Implementasi**: Cutting 
 * **Konsep OOP**:
-  - Inheritance<br>
+   - Inheritance<br>
     Kelas CuttingCounter mewarisi dari BaseCounter. Pewarisan memungkinkan kelas anak (CuttingCounter) untuk menggunakan atau menimpa properti dan metode dari kelas induk (BaseCounter).
     ```
     public class CuttingCounter : BaseCounter, IHasProgress
     ```
-  - Encapsulation<br>
+   - Encapsulation<br>
     Kode ini menggunakan access modifiers seperti private dan public untuk mengontrol akses terhadap data atau metode. Misalnya:
     Variabel cuttingRecipeSOArray dienkapsulasi dengan private untuk mencegah akses langsung dari luar kelas.
     Fungsi HasRecipeWithInput membungkus logika pengecekan resep, sehingga detailnya tidak terlihat di luar kelas.
@@ -365,4 +418,13 @@ achievementManager.EvaluateAchievements(currentSession);
 
 ## 8. Kesimpulan dan Pembelajaran
 * **Kesimpulan**:
+  Kami berhasil menyelesaikan proyek Game bertema memasak yang kami beri nama Gosong Cooking. Dalam pengembangannya, kami telah menerapkan berbagai konsep pemrograman berbasis objek (OOP) dan prinsip-prinsip desain perangkat lunak SOLID. Proyek ini memberikan sebuah tantangan teknis, dan juga sebuah perjalanan yang meningkatkan pemahaman kami dalam bidang Pemrograman Berbasis Objek khususnya.
+  
+Meskipun tidak lepas dari berbagai kendala dan tantangan, seperti pengelolaan waktu yang kurang optimal serta beberapa hambatan teknis yang harus dihadapi, kami merasa bangga dengan hasil yang telah dicapai (walaupun dirasa belum maksimal). Kendala-kendala tersebut justru menjadi bagian penting dari proses belajar, mendorong kami untuk berpikir kritis dan mencari solusi yang kreatif.
+
 * **Pembelajaran**:
+  Salah satu pelajaran berharga yang kami peroleh dari pengalaman ini adalah pentingnya manajemen waktu yang baik. Kami menyadari bahwa mengerjakan proyek dengan jadwal yang mepet dapat memengaruhi kualitas akhir yang dihasilkan. Oleh karena itu, ke depannya kami akan belajar untuk merencanakan waktu dengan lebih matang agar setiap tugas dapat diselesaikan dengan lebih baik dan tanpa tekanan yang berlebihan. Dengan persiapan yang lebih baik, kami yakin hasil yang akan kami capai di masa depan dapat jauh lebih maksimal.
+
+Selain itu, kami juga belajar bagaimana menerapkan prinsip-prinsip desain perangkat lunak seperti SOLID. Penerapan OOP dalam game ini juga mengajarkan kami bagaimana membuat kode yang bersih, terorganisir, dan terstruktur, sehingga lebih mudah dipahami dan dikelola.
+
+Kami berharap, dengan semua pengalaman dan pembelajaran yang telah kami peroleh, kami dapat terus berkembang di masa mendatang.
