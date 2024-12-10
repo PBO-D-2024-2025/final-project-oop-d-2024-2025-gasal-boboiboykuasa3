@@ -15,26 +15,20 @@
 * **Genre**: Cooking
 * **Gameplay/Rule**: <br>
 
-  The game offers **Single Player** and **Multiplayer modes**.
+  The game offers **Single Player**
  <br> In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
-**Multiplayer** Mode enables players to work together, with the chance to assign tasks to each player. Collaborative gameplay can yield higher scores through efficient teamwork. <br>
 <br>**Scoring:** Points are awarded based on the number of dishes completed. <br>
 <br>**Recipe System:** <br>
     Each dish has a recipe that includes specific ingredients and steps (e.g., chopped vegetables, fried meat, boiled pasta).
 Different difficulty levels could introduce more complex recipes <br>
-<br>**Difficulty Levels:** <br>
-    **Easy:** More time, simpler recipes. <br>
-    **Medium:** Moderate time, recipes with more steps. <br>
-    **Hard:** Less time, more complex recipes. <br>
 
 * **Objective**: Cook as much dishes as possible based on the given recipe until the time is up. <br>
 
-* **Single/Multi Player**: Both
+* **Single/Multi Player**: Single Player
 
 ### 2.2 Fitur Utama
-1. Choose difficulty
-2. Choose character
-3. Co-op multiplayer
+1. Cooking (Cutting, Frying)
+2. Recipe Succeed
 
 ## 3. Implementasi Fitur Wajib
 
@@ -132,8 +126,8 @@ achievementManager.EvaluateAchievements(currentSession);
 
 ## 4. Implementasi Fitur Lain
 
-### 4.1 Fitur 1
-* **Implementasi**:
+### 4.1 Fitur
+* **Implementasi**: Recipe List
 * **Konsep OOP**:
 * **Penerapan SOLID (Optional)**:
 * **Design Pattern yang Digunakan (Optional)**:
@@ -143,7 +137,7 @@ achievementManager.EvaluateAchievements(currentSession);
 ```
 
 ### 4.2 Fitur 2
-* **Implementasi**:
+* **Implementasi**: Pause/Resume
 * **Konsep OOP**:
 * **Penerapan SOLID (Optional)**:
 * **Design Pattern yang Digunakan (Optional)**:
@@ -163,10 +157,8 @@ achievementManager.EvaluateAchievements(currentSession);
 3. [Langkah n]
 
 ## 7. Kendala dan Solusi
-1. **Kendala 1**:
-    * Solusi:
-2. **Kendala 2**:
-    * Solusi:
+1. **Kendala 1**: Waktu Final Project bertabrakan dengan berbagai tugas final dan juga EAS matakuliah
+    * Solusi: Mengatur waktu sebaik mungkin
 
 ## 8. Kesimpulan dan Pembelajaran
 * **Kesimpulan**:
