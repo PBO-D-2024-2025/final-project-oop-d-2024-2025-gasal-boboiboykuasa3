@@ -138,17 +138,13 @@ public class GameOverUI : MonoBehaviour
 
 ### 3.2 Achievement System
 * **Jenis Achievement**:
-    1. High Score Hard Level: Awarded when the player scores at least 10 points in Hard level.
-    2. Multiplayer Score Goal: Awarded when the player scores at least 20 points in Multiplayer mode.
+    1. Cupu : Berhasil menyelesaikan 2 resep sebelum waktu habis
+    2. Baja : Berhasil menyelesaikan 4 resep sebelum waktu habis
+    3. Dewa : Berhasil menyelesaikan 6 resep sebelum waktu habis
 * **Konsep OOP**:<br>
-  **Encapsulation**: Each achievement is responsible for managing its own criteria and tracking whether it is unlocked, encapsulating behavior within specific classes.
-  <br>**Inheritance**: Different achievements inherit from the Achievement base class, sharing properties and methods while allowing specific criteria implementations.
-  <br>**Polymorphism**: By overriding CheckCriteria, each achievement implements custom behavior for checking score-based conditions.
+
 * **Penerapan SOLID**:
- <br> **Open/Closed Principle (OCP)**: New achievements can be added as subclasses without modifying the base class, making the system extensible.
-  <br>**Liskov Substitution Principle (LSP)**: Any specific achievement class (e.g., HighScoreHardLevel) can replace the Achievement base class without affecting the AchievementManager.c
-  <br>**Interface Segregation Principle (ISP)**: If you were to have separate interfaces for achievements based on score, multiplayer, etc., you would implement only relevant interfaces.
-  <br>**Dependency Inversion Principle (DIP)**: The AchievementManager depends on abstractions (the Achievement class) rather than concrete implementations, allowing flexibility.
+
 * **Code Snippet**:
 ```
 public class HighScoreHardLevel : Achievement
@@ -227,9 +223,10 @@ achievementManager.EvaluateAchievements(currentSession);
     }
   ```
 * **Penerapan SOLID**:
-  - Single Responsibility Principle (SRP):
-  Kelas CuttingCounter hanya bertanggung jawab untuk menangani logika pemotongan objek dapur `(kitchen object)`. Tugasnya terbatas pada proses interaksi terkait pemotongan dan progresnya, tanpa mencampuradukkan      tanggung jawab lain seperti memasak atau penyimpanan.
-  - Open/Closed Principle (OCP):
+  - **Single Responsibility Principle (SRP):**
+  Kelas `CuttingCounter` hanya bertanggung jawab untuk menangani logika pemotongan objek dapur `(kitchen object)`. Tugasnya terbatas pada proses interaksi terkait pemotongan dan progresnya, tanpa       
+  mencampuradukkan tanggung jawab lain seperti memasak atau penyimpanan.
+  - **Open/Closed Principle (OCP):**
   `CuttingCounter` mendukung ekspansi melalui penggunaan `ScriptableObject (CuttingRecipeSO)`. Menambahkan resep baru tidak memerlukan perubahan pada kode kelas ini, cukup dengan menambahkan objek baru ke daftar 
   resep.
 
@@ -272,10 +269,10 @@ achievementManager.EvaluateAchievements(currentSession);
     }
     ```
   * **Penerapan SOLID**:
-    - Dependency Inversion Principle (DIP):
-      TrashCounter bergantung pada abstraksi seperti `KitchenObject` tanpa mengikat diri pada detail implementasi.
-    - Single Responsibility Principle (SRP):
-      TrashCounter hanya menangani logika pembuangan objek dapur, memastikan kelas ini tetap fokus dan tidak memiliki tanggung jawab lain seperti memasak atau penyajian.
+    - **Dependency Inversion Principle (DIP):**
+      `TrashCounter` bergantung pada abstraksi seperti `KitchenObject` tanpa mengikat diri pada detail implementasi.
+    - **Single Responsibility Principle (SRP):**
+      `TrashCounter` hanya menangani logika pembuangan objek dapur, memastikan kelas ini tetap fokus dan tidak memiliki tanggung jawab lain seperti memasak atau penyajian.
       
 ### 4.3 Fitur 3
 * **Implementasi**: Delivery
@@ -311,11 +308,11 @@ achievementManager.EvaluateAchievements(currentSession);
     DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
     ```
 * **Penerapan SOLID**:
-  - Single Responsibility Principle (SRP):
-    DeliveryCounter hanya bertugas menangani logika penyampaian `(delivery)` makanan ke sistem manajer pengantaran `(DeliveryManager)`. Ini memastikan kelas tetap fokus pada satu tanggung jawab.
-  - Interface Segregation Principle (ISP):
+  - **Single Responsibility Principle (SRP):**
+    `DeliveryCounter` hanya bertugas menangani logika penyampaian `(delivery)` makanan ke sistem manajer pengantaran `(DeliveryManager)`. Ini memastikan kelas tetap fokus pada satu tanggung jawab.
+  - **Interface Segregation Principle (ISP):**
     Tidak ada antarmuka tambahan yang diterapkan di luar kebutuhan pengantaran. Semua fungsi relevan dengan tujuan kelas.
-  - Dependency Inversion Principle (DIP):
+  - **Dependency Inversion Principle (DIP):**
     `DeliveryCounter` berinteraksi dengan `DeliveryManager` melalui abstraksi, memudahkan penggantian atau perubahan dalam sistem manajemen pengantaran.
     
 ### 4.4 Fitur 4
@@ -373,10 +370,10 @@ achievementManager.EvaluateAchievements(currentSession);
     }
    ```
 * **Penerapan SOLID**:
-  - Single Responsibility Principle (SRP):
+  - **Single Responsibility Principle (SRP):**
     `StoveCounter` bertanggung jawab atas logika memasak objek dapur. Semua tanggung jawab terkait penggorengan dipisahkan dari fitur lain seperti pemotongan atau penyajian.
 
-  - Open/Closed Principle (OCP):
+  - **Open/Closed Principle (OCP):**
     Sistem mendukung penambahan resep memasak atau pembakaran baru dengan memperluas `ScriptableObject (FryingRecipeSO dan BurningRecipeSO)`, tanpa mengubah kode inti.
 ### 4.5 Fitur 5
 * **Implementasi**: Plate Spawning
@@ -428,9 +425,9 @@ achievementManager.EvaluateAchievements(currentSession);
     }
     ```
 * **Penerapan SOLID**:
-  - Single Responsibility Principle (SRP):
+  - **Single Responsibility Principle (SRP):**
     `PlatesCounter` bertanggung jawab mengelola logika pemunculan dan pengambilan piring, tanpa mencampurkan fungsionalitas lain seperti memasak atau penyajian.
-  - Open/Closed Principle (OCP):
+  - **Open/Closed Principle (OCP):**
     Sistem ini dapat diperluas, misalnya dengan menambahkan variasi jenis piring yang dihasilkan melalui pengaturan `KitchenObjectSO`, tanpa memodifikasi kode inti.
 ## 5. Screenshot dan Demo
 * **Screenshot 1**: [Deskripsi]
