@@ -143,34 +143,144 @@ public class GameOverUI : MonoBehaviour
     2. Baja : Berhasil menyelesaikan 4 resep sebelum waktu habis
     3. Dewa : Berhasil menyelesaikan 6 resep sebelum waktu habis
 * **Konsep OOP**:<br>
+  - Encapsulation
+    Data dan perilaku terkait pencapaian `(achievement)` disatukan dalam satu kelas `AchievementUI`.
+    Variabel seperti `achievementPanel, achievementText, dan unlockedAchievements` bersifat privat atau hanya diakses melalui metode tertentu, menjaga integritas data.
+    ```
+    [SerializeField] private GameObject achievementPanel; 
+    [SerializeField] private TextMeshProUGUI achievementText; 
+    private HashSet<string> unlockedAchievements = new HashSet<string>();
+    ```
 
 * **Penerapan SOLID**:
+  - Single Responsibility Principle (SRP):
+  Kelas `AchievementUI` hanya bertanggung jawab untuk menangani pencapaian (mengecek, menampilkan, menyimpan, dan memuat).
+  ```
+  public void CheckAchievements(int currentDeliveries) {
+    // Mengecek dan menambah achievement berdasarkan jumlah delivery
+  }
+  
+  private void SaveAchievements() {
+      // Menyimpan achievement ke PlayerPrefs
+  }
+  
+  private void LoadAchievements() {
+      // Memuat achievement dari PlayerPrefs
+  }
+  ```
+  - Open/Closed Principle (OCP):
+    Kelas ini terbuka untuk ekstensifikasi tetapi tertutup untuk modifikasi. Misalnya, jika ingin menambahkan jenis `achievement` baru, kita hanya perlu menambah logika di `CheckAchievements` tanpa mengubah          mekanisme lainnya.
+  ```
+  if (currentDeliveries >= 6 && !unlockedAchievements.Contains("DEWA")) {
+    unlockedAchievements.Add("DEWA");
+    newUnlockedAchievements.Add("DEWA");
+    }
+  ```
 
 * **Code Snippet**:
 ```
-public class HighScoreHardLevel : Achievement
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class AchievementUI : MonoBehaviour
 {
-    public HighScoreHardLevel()
+    [SerializeField] private GameObject achievementPanel;  
+    [SerializeField] private TextMeshProUGUI achievementText;  
+    [SerializeField] private float displayDuration = 3f; 
+
+    private HashSet<string> unlockedAchievements = new HashSet<string>();  
+    private int currentDeliveries = 0;  
+
+    private const string AchievementKey = "UnlockedAchievements";  
+
+    private void Start()
     {
-        Name = "High Score in Hard Level";
-        Description = "Score at least 10 points in Hard difficulty.";
-        ScoreThreshold = 10;
-        IsUnlocked = false;
+        achievementPanel.SetActive(false); 
+
+        
+        LoadAchievements();
+        DeliveryManager.Instance.OnRecipeSucces += OnRecipeSucces;
     }
 
-    public override bool CheckCriteria(GameSession session)
+    private void OnRecipeSucces(object sender, System.EventArgs e)
     {
-        if (session.Difficulty == "Hard" && session.Score >= ScoreThreshold)
+        currentDeliveries = DeliveryManager.Instance.GetSuccessfulRecipesAmount();  
+        CheckAchievements(currentDeliveries); 
+    }
+
+    
+    public void CheckAchievements(int currentDeliveries)
+    {
+        List<string> newUnlockedAchievements = new List<string>();
+
+
+        if (currentDeliveries >= 2 && !unlockedAchievements.Contains("CUPU"))
         {
-            IsUnlocked = true;
+            unlockedAchievements.Add("CUPU");
+            newUnlockedAchievements.Add("CUPU");
         }
-        return IsUnlocked;
+
+
+        if (currentDeliveries >= 4 && !unlockedAchievements.Contains("B AJA"))
+        {
+            unlockedAchievements.Add("B AJA");
+            newUnlockedAchievements.Add("B AJA");
+        }
+
+
+        if (currentDeliveries >= 6 && !unlockedAchievements.Contains("DEWA"))
+        {
+            unlockedAchievements.Add("DEWA");
+            newUnlockedAchievements.Add("DEWA");
+        }
+
+
+        if (newUnlockedAchievements.Count > 0)
+        {
+            ShowAchievements(newUnlockedAchievements);
+            SaveAchievements(); 
+        }
+    }
+
+
+    private void ShowAchievements(List<string> newUnlockedAchievements)
+    {
+        achievementPanel.SetActive(true);
+        achievementText.text = string.Join("\n", newUnlockedAchievements);  
+        StartCoroutine(HideAchievementPanelAfterDelay());
+    }
+
+
+    private IEnumerator HideAchievementPanelAfterDelay()
+    {
+        yield return new WaitForSeconds(displayDuration);
+        achievementPanel.SetActive(false); 
+    }
+
+    // Menyimpan pencapaian yang telah dibuka ke PlayerPrefs
+    private void SaveAchievements()
+    {
+        string achievementsString = string.Join(",", unlockedAchievements);  
+        PlayerPrefs.SetString(AchievementKey, achievementsString);  
+        PlayerPrefs.Save(); 
+    }
+
+    
+    private void LoadAchievements()
+    {
+        if (PlayerPrefs.HasKey(AchievementKey))
+        {
+            string savedAchievements = PlayerPrefs.GetString(AchievementKey);  
+            string[] achievementsArray = savedAchievements.Split(',');  
+            foreach (string achievement in achievementsArray)
+            {
+                unlockedAchievements.Add(achievement);  
+            }
+        }
     }
 }
-
-AchievementManager achievementManager = new AchievementManager();
-GameSession currentSession = new GameSession("Hard", "Single Player", 10); // Example session with score
-achievementManager.EvaluateAchievements(currentSession);
 
 ```
 
@@ -437,6 +547,9 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Screenshot 4**: Cutting
 * **Screenshot 5**: Delivery
 * **Screenshot 6**: Pause
+* **Screenshot 6**: Achievements
+  ![WhatsApp Image 2024-12-10 at 22 53 49_85fc91b6](https://github.com/user-attachments/assets/faafcf27-39e6-4bd9-a6a5-742fe5ff14ae)
+
 * **Link Demo Video**: [URL]
 
 ## 6. Panduan Instalasi dan Menjalankan Game
