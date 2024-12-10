@@ -17,12 +17,13 @@
 * **Genre**: Cooking
 * **Gameplay/Rule**: <br>
 
-  The game offers **Single Player** mode.
-<br>**Scoring:** Points are awarded based on the number of dishes completed. <br>
+Game ini menawarkan **Single Player** Mode.
+Pemain bertugas untuk memasak hidangan berdasarkan resep yang telah ditentukan. Pemain harus memotong bahan, memasak di alat masak tertentu (seperti kompor), dan menyajikan makanan dengan urutan yang benar untuk mendapatkan poin.
+<br>**Scoring:** Poin diberikan berdasarkan jumlah hidangan yang berhasil dimasak dan disajikan dengan benar. <br>
 <br>**Recipe System:** <br>
-    Each dish has a recipe that includes specific ingredients and steps (e.g., chopped vegetables, fried meat, boiled pasta).
+    Setiap hidangan memiliki resep unik yang terdiri dari bahan-bahan tertentu dan langkah-langkah spesifik.
 
-* **Objective**: Cook as much dishes as possible based on the given recipe until the time is up. <br>
+* **Objective**: Tujuan utama dalam game ini adalah untuk memasak dan menyajikan sebanyak mungkin hidangan berdasarkan resep yang diberikan sebelum waktu habis. <br>
 
 * **Single/Multi Player**: Single Player
 
