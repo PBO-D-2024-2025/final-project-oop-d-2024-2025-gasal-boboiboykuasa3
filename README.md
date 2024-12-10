@@ -430,8 +430,12 @@ achievementManager.EvaluateAchievements(currentSession);
   - **Open/Closed Principle (OCP):**
     Sistem ini dapat diperluas, misalnya dengan menambahkan variasi jenis piring yang dihasilkan melalui pengaturan `KitchenObjectSO`, tanpa memodifikasi kode inti.
 ## 5. Screenshot dan Demo
-* **Screenshot 1**: [Deskripsi]
-* **Screenshot 2**: [Deskripsi]
+* **Screenshot 1**: Main Menu
+* **Screenshot 2**: Main Game
+* **Screenshot 3**: Frying
+* **Screenshot 4**: Cutting
+* **Screenshot 5**: Delivery
+* **Screenshot 6**: Pause
 * **Link Demo Video**: [URL]
 
 ## 6. Panduan Instalasi dan Menjalankan Game
