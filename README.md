@@ -139,9 +139,9 @@ public class GameOverUI : MonoBehaviour
 
 ### 3.2 Achievement System
 * **Jenis Achievement**:
-    1. Cupu : Berhasil menyelesaikan 2 resep sebelum waktu habis
-    2. Baja : Berhasil menyelesaikan 4 resep sebelum waktu habis
-    3. Dewa : Berhasil menyelesaikan 6 resep sebelum waktu habis
+    1. `CUPU` : Berhasil menyelesaikan 2 resep sebelum waktu habis
+    2. `B AJA` : Berhasil menyelesaikan 4 resep sebelum waktu habis
+    3. `DEWA` : Berhasil menyelesaikan 6 resep sebelum waktu habis
 * **Konsep OOP**:<br>
   - Encapsulation
     Data dan perilaku terkait pencapaian `(achievement)` disatukan dalam satu kelas `AchievementUI`.
