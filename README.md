@@ -569,6 +569,7 @@ public class AchievementUI : MonoBehaviour
   ![WhatsApp Image 2024-12-10 at 22 53 49_85fc91b6](https://github.com/user-attachments/assets/faafcf27-39e6-4bd9-a6a5-742fe5ff14ae)
 
 * **Link Demo Video**: https://youtu.be/k9vcOy5YI9Q
+* **Link Download Game**: https://drive.google.com/file/d/14Q_knJ8NxM0oo7zDZgKD6cikKGHk8jpy/view?usp=sharing
 
 ## 6. Panduan Instalasi dan Menjalankan Game
 1. Pastikan Sudah men-download Unity
