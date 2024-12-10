@@ -4,9 +4,11 @@
 ## 1. Informasi Umum
 * **Nama Game**: Gosong Cooking
 * **Anggota Kelompok**:
+  
     1. Nixon Castroman - 5025231024
     2. Dustin Felix - 5025231046
     3. Daffano Abyan Zakyanto Azmy- 5025231249
+       
 * **Tech Stack**: [C#, Unity]
 
 ## 2. Deskripsi Game
