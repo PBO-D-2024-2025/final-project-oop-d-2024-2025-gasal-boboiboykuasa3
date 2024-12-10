@@ -541,21 +541,41 @@ public class AchievementUI : MonoBehaviour
   - **Open/Closed Principle (OCP):**
     Sistem ini dapat diperluas, misalnya dengan menambahkan variasi jenis piring yang dihasilkan melalui pengaturan `KitchenObjectSO`, tanpa memodifikasi kode inti.
 ## 5. Screenshot dan Demo
-* **Screenshot 1**: Main Menu
-* **Screenshot 2**: Main Game
-* **Screenshot 3**: Frying
-* **Screenshot 4**: Cutting
-* **Screenshot 5**: Delivery
-* **Screenshot 6**: Pause
-* **Screenshot 6**: Achievements
+* **Screenshot 1**: Main Menu <br>
+![WhatsApp Image 2024-12-10 at 23 16 04_5f9a0434](https://github.com/user-attachments/assets/335370b4-fe10-4b3e-9435-eb4aaf98a680)
+
+* **Screenshot 2**: Main Game <br>
+![WhatsApp Image 2024-12-10 at 23 16 22_b7ec0948](https://github.com/user-attachments/assets/d49c7d0a-e586-4c57-9deb-5d44ab0f160b)
+
+* **Screenshot 3**: Frying <br>
+![WhatsApp Image 2024-12-10 at 23 17 53_6b730652](https://github.com/user-attachments/assets/c5224fdd-b380-4173-99ef-6b7f3aedea60)
+
+* **Screenshot 4**: Cutting <br>
+![WhatsApp Image 2024-12-10 at 23 17 33_75ea2dd5](https://github.com/user-attachments/assets/ede7f463-3774-45f5-b13d-34e7797ac269)
+
+* **Screenshot 5**: Delivery <br>
+![WhatsApp Image 2024-12-10 at 23 18 42_57c14e10](https://github.com/user-attachments/assets/4a51ee2a-5f5e-4611-a30c-08671fa56659)
+
+* **Screenshot 6**: Trash <br>
+![WhatsApp Image 2024-12-10 at 23 18 59_bd9c6295](https://github.com/user-attachments/assets/3ed54de4-9031-48c2-9227-c229640e1973)
+
+
+* **Screenshot 7**: Pause <br>
+![WhatsApp Image 2024-12-10 at 23 19 10_85145c8d](https://github.com/user-attachments/assets/e5dba7f4-0d0f-44e0-b89e-c2619b1c5a8c)
+
+* **Screenshot 8**: Achievements <br>
+![WhatsApp Image 2024-12-10 at 23 20 08_de11cf10](https://github.com/user-attachments/assets/81f5ee43-079f-4d74-ba59-22fbddaf9cde)
+
   ![WhatsApp Image 2024-12-10 at 22 53 49_85fc91b6](https://github.com/user-attachments/assets/faafcf27-39e6-4bd9-a6a5-742fe5ff14ae)
 
 * **Link Demo Video**: [URL]
 
 ## 6. Panduan Instalasi dan Menjalankan Game
-1. Download folder yang diberikan
-2. [Langkah 2]
-3. [Langkah n]
+1. Pastikan Sudah men-download Unity
+2. Kemudian Download folder yang diberikan
+3. Pada unity pilih opsi add -> Add From Disk -> Kemudian pilih folder yang sudah di download
+4. Setelah selesai mengimport project, double click untuk membuka project
+5. Pada unity, klik tombol run di atas dan Game akan berjalan
 
 ## 7. Kendala dan Solusi
 1. **Kendala 1**: Waktu pengerjaan Final Project bertabrakan dengan berbagai tugas akhir lainnya serta Ujian Akhir Semester (EAS) beberapa mata kuliah.
