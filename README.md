@@ -572,11 +572,11 @@ public class AchievementUI : MonoBehaviour
 * **Link Download Game**: https://drive.google.com/file/d/14Q_knJ8NxM0oo7zDZgKD6cikKGHk8jpy/view?usp=sharing
 
 ## 6. Panduan Instalasi dan Menjalankan Game
-1. Pastikan Sudah men-download Unity
-2. Kemudian Download folder yang diberikan
-3. Pada unity pilih opsi add -> Add From Disk -> Kemudian pilih folder yang sudah di download
-4. Setelah selesai mengimport project, double click untuk membuka project
-5. Pada unity, klik tombol run di atas dan Game akan berjalan
+1. Download File Zip melalui link diatas
+2. Setelah itu extract filenya
+3. Masuk kedalam folder `GosongCooking` dan cari file GosongCooking.exe
+4. Kemudian Double Click
+5. Game akan berjalan
 
 ## 7. Kendala dan Solusi
 1. **Kendala 1**: Waktu pengerjaan Final Project bertabrakan dengan berbagai tugas akhir lainnya serta Ujian Akhir Semester (EAS) beberapa mata kuliah.
