@@ -26,7 +26,8 @@
 
 ### 2.2 Fitur Utama
 1. Cooking (Cutting, Frying)
-2. Recipe Succeed
+2. Delivery
+3. Timer
 
 ## 3. Implementasi Fitur Wajib
 
@@ -35,7 +36,8 @@
   Memberikan Highest Score
 * **Konsep OOP**:<br>
   - Encapsulation <br>
-    Detail implementasi seperti pengaturan teks untuk tampilan skor akhir dan skor tertinggi (recipesDeliveredText, highScoreText) hanya dapat diakses di dalam kelas. Metode seperti Show dan Hide juga digunakan     untuk mengatur visibilitas UI tanpa mengekspos detail implementasi ke luar.
+    Detail implementasi seperti pengaturan teks untuk tampilan skor akhir dan skor tertinggi `(recipesDeliveredText, highScoreText)` hanya dapat diakses di dalam kelas. Metode seperti `Show` dan `Hide` juga 
+    digunakan untuk mengatur visibilitas UI tanpa mengekspos detail implementasi ke luar.
     ```
     [SerializeField] private TextMeshProUGUI recipesDeliveredText;
     [SerializeField] private TextMeshProUGUI highScoreText;
@@ -51,7 +53,8 @@
     }
     ```
   - Abstraction <br>
-   Kelas ini menyembunyikan logika bagaimana data skor saat ini (currentScore) diperoleh dari DeliveryManager atau bagaimana skor tertinggi dikelola menggunakan PlayerPrefs. Pengembang hanya berinteraksi dengan     kelas ini melalui event KitchenGameManager_OnStateChanged.
+   Kelas ini menyembunyikan logika bagaimana data skor saat ini `(currentScore)` diperoleh dari `DeliveryManager` atau bagaimana skor tertinggi dikelola menggunakan `PlayerPrefs`. Pengembang hanya berinteraksi 
+   dengan kelas ini melalui event `KitchenGameManager_OnStateChanged`.
    ```
     int currentScore = DeliveryManager.Instance.GetSuccessfulRecipesAmount();
     int highScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -68,7 +71,7 @@
 * **Penerapan SOLID**:<br>
   - Single Responsibility Principle (SRP)
     Kelas ini hanya bertanggung jawab untuk mengatur tampilan layar akhir permainan. Hal ini mencakup menampilkan skor saat ini dan skor tertinggi, serta mengatur visibilitas layar.
-    Logika penghitungan skor dan manajemen state game ditangani oleh DeliveryManager dan KitchenGameManager.
+    Logika penghitungan skor dan manajemen state game ditangani oleh `DeliveryManager` dan `KitchenGameManager`.
   
 * **Design Pattern yang Digunakan**:
 * **Code Snippet**:
@@ -181,21 +184,21 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Implementasi**: Cutting 
 * **Konsep OOP**:
    - Inheritance<br>
-    Kelas CuttingCounter mewarisi dari BaseCounter. Pewarisan memungkinkan kelas anak (CuttingCounter) untuk menggunakan atau menimpa properti dan metode dari kelas induk (BaseCounter).
+    Kelas `CuttingCounter` mewarisi dari `BaseCounter`. Pewarisan memungkinkan kelas anak `(CuttingCounter)` untuk menggunakan atau menimpa properti dan metode dari kelas induk `(BaseCounter)`.
     ```
     public class CuttingCounter : BaseCounter, IHasProgress
     ```
    - Encapsulation<br>
-    Kode ini menggunakan access modifiers seperti private dan public untuk mengontrol akses terhadap data atau metode. Misalnya:
-    Variabel cuttingRecipeSOArray dienkapsulasi dengan private untuk mencegah akses langsung dari luar kelas.
-    Fungsi HasRecipeWithInput membungkus logika pengecekan resep, sehingga detailnya tidak terlihat di luar kelas.
+    Kode ini menggunakan access modifiers seperti `private` dan `public` untuk mengontrol akses terhadap data atau metode. Misalnya:
+    Variabel `cuttingRecipeSOArray` dienkapsulasi dengan private untuk mencegah akses langsung dari luar kelas.
+    Fungsi `HasRecipeWithInput` membungkus logika pengecekan resep, sehingga detailnya tidak terlihat di luar kelas.
     ```
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
     private int cuttingProgress;
     ```
 
   - Polymorphism<br>
-   Kelas ini menimpa metode Interact dan InteractAlternate dari kelas induk BaseCounter, menunjukkan overriding. Ini memungkinkan perilaku yang berbeda untuk metode yang sama di kelas anak.
+   Kelas ini menimpa metode `Interact` dan `InteractAlternate` dari kelas induk `BaseCounter`, menunjukkan `overriding`. Ini memungkinkan perilaku yang berbeda untuk metode yang sama di kelas anak.
    ```
     public override void Interact(Player player)
     {
@@ -210,7 +213,7 @@ achievementManager.EvaluateAchievements(currentSession);
    ```
 
  - Abstraction<br>
-  Kelas ini menyembunyikan detail implementasi dari logika kompleks, seperti logika untuk memeriksa resep (HasRecipeWithInput) dan mendapatkan output resep (GetOutputForInput).
+  Kelas ini menyembunyikan detail implementasi dari logika kompleks, seperti logika untuk memeriksa resep `(HasRecipeWithInput)` dan mendapatkan output resep `(GetOutputForInput)`.
   ```
   private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
@@ -229,18 +232,19 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Implementasi**: Throwing Trash
 * **Konsep OOP**:
   - Inheritance<br>
-    Kelas TrashCounter mewarisi dari BaseCounter, yang memungkinkan TrashCounter untuk menggunakan metode atau properti dari kelas induknya, termasuk metode Interact.
+    Kelas `TrashCounter` mewarisi dari `BaseCounter`, yang memungkinkan `TrashCounter` untuk menggunakan metode atau properti dari kelas induknya, termasuk metode `Interact`.
     ```
     public class TrashCounter : BaseCounter
     ```
   - Abstraction<br>
-    Kelas ini menyembunyikan detail implementasi terkait dengan cara objek dihancurkan (DestroySelf) atau cara event OnAnyObjectTrashed dipanggil. Pemain hanya perlu memanggil Interact, tanpa mengetahui detail       teknis.
+    Kelas ini menyembunyikan detail implementasi terkait dengan cara objek dihancurkan `(DestroySelf)` atau cara event `OnAnyObjectTrashed` dipanggil. Pemain hanya perlu memanggil `Interact`, tanpa mengetahui 
+    detail teknis.
     ```
     player.GetKitchenObject().DestroySelf();
     OnAnyObjectTrashed?.Invoke(this, EventArgs.Empty);
     ```
   - Encapsulation<br>
-    Data atau logika seperti event OnAnyObjectTrashed dienkapsulasi, sehingga hanya bisa diakses melalui kelas ini. Selain itu, metode ResetStaticData digunakan untuk mengatur ulang event secara aman.
+    Data atau logika seperti event `OnAnyObjectTrashed` dienkapsulasi, sehingga hanya bisa diakses melalui kelas ini. Selain itu, metode `ResetStaticData` digunakan untuk mengatur ulang event secara aman.
     ```
     public static event EventHandler OnAnyObjectTrashed;
 
@@ -250,7 +254,7 @@ achievementManager.EvaluateAchievements(currentSession);
     }
     ```
   - Polymorphism<br>
-    Metode Interact dari BaseCounter ditimpa (overridden) untuk memberikan perilaku spesifik bagi TrashCounter, yaitu menghancurkan objek yang dipegang oleh pemain.
+    Metode `Interact` dari `BaseCounter` ditimpa (overridden) untuk memberikan perilaku spesifik bagi `TrashCounter`, yaitu menghancurkan objek yang dipegang oleh pemain.
     ```
     public override void Interact(Player player)
     {
@@ -266,12 +270,12 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Implementasi**: Delivery
 * **Konsep OOP**:
   - Encapsulation<br>
-    Properti Instance dienkapsulasi sebagai properti public dengan pengaturan hanya dapat dilakukan secara privat. Hal ini memastikan bahwa hanya satu instance DeliveryCounter yang ada pada waktu tertentu.
+    Properti `Instance` dienkapsulasi sebagai properti public dengan pengaturan hanya dapat dilakukan secara `privat`. Hal ini memastikan bahwa hanya satu instance `DeliveryCounter` yang ada pada waktu tertentu.
     ```
     public static DeliveryCounter Instance { get; private set; }
     ```
   - Polymorphism<br>
-    Metode Interact dari BaseCounter ditimpa untuk memberikan logika khusus pada DeliveryCounter. Saat pemain berinteraksi, game memeriksa apakah pemain membawa sesuatu, dan jika iya, memproses pengiriman resep.
+    Metode `Interact` dari `BaseCounter` ditimpa untuk memberikan logika khusus pada `DeliveryCounter`. Saat pemain berinteraksi, game memeriksa apakah pemain membawa sesuatu, dan jika iya, memproses pengiriman resep.
     ```
     public override void Interact(Player player)
     {
@@ -286,12 +290,12 @@ achievementManager.EvaluateAchievements(currentSession);
     }
     ```
   - Inheritance<br>
-    Kelas DeliveryCounter mewarisi BaseCounter, memungkinkan untuk menggunakan metode dan properti bawaan seperti Interact.
+    Kelas `DeliveryCounter` mewarisi `BaseCounter`, memungkinkan untuk menggunakan metode dan properti bawaan seperti `Interact`.
     ```
     public class DeliveryCounter : BaseCounter
     ```
   - Abstraction<br>
-    Kode ini menyembunyikan detail teknis proses pengiriman resep. Pemain hanya perlu memanggil Interact tanpa mengetahui bagaimana DeliveryManager bekerja.
+    Kode ini menyembunyikan detail teknis proses pengiriman resep. Pemain hanya perlu memanggil `Interact` tanpa mengetahui bagaimana `DeliveryManager` bekerja.
     ```
     DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
     ```
@@ -300,12 +304,12 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Implementasi**: Frying
 * **Konsep OOP**:
   - Inheritance<br>
-    Kelas StoveCounter mewarisi dari BaseCounter, memungkinkan StoveCounter untuk menggunakan metode atau properti dari kelas induknya, seperti Interact.
+    Kelas `StoveCounter` mewarisi dari `BaseCounter`, memungkinkan `StoveCounter` untuk menggunakan metode atau properti dari kelas induknya, seperti `Interact`.
     ```
     public class StoveCounter : BaseCounter, IHasProgress
     ```
   - Encapsulation<br>
-    Kode ini menjaga detail implementasi dengan menggunakan variabel privat (private) dan properti serialized ([SerializeField]) untuk pengelolaan data resep dan state internal.
+    Kode ini menjaga detail implementasi dengan menggunakan variabel privat `(private)` dan properti serialized `([SerializeField])` untuk pengelolaan data resep dan state internal.
     ```
     [SerializeField] private FryingRecipeSO[] fryingRecipeSOArray;
     [SerializeField] private BurningRecipeSO[] burningRecipeSOArray;
@@ -317,7 +321,7 @@ achievementManager.EvaluateAchievements(currentSession);
     private BurningRecipeSO burningRecipeSO;
     ```
   - Polymorphism<br>
-    Kelas ini menimpa metode Interact dari BaseCounter untuk memberikan perilaku spesifik saat pemain berinteraksi dengan StoveCounter.
+    Kelas ini menimpa metode `Interact` dari `BaseCounter` untuk memberikan perilaku spesifik saat pemain berinteraksi dengan `StoveCounter`.
     ```
     public override void Interact(Player player)
     {
@@ -329,8 +333,8 @@ achievementManager.EvaluateAchievements(currentSession);
         }
     }
     ```
- - Abstraction<br>
-   Fungsi seperti HasRecipeWithInput, GetFryingRecipeSOWithInput, dan GetBurningRecipeSOWithInput menyembunyikan detail implementasi terkait pemeriksaan atau pencarian resep, sehingga membuat kode lebih bersih.
+  - Abstraction<br>
+   Fungsi seperti `HasRecipeWithInput, GetFryingRecipeSOWithInput, dan GetBurningRecipeSOWithInput` menyembunyikan detail implementasi terkait pemeriksaan atau pencarian resep, sehingga membuat kode lebih bersih.
    ```
     private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
@@ -354,12 +358,12 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Implementasi**: Plate Spawning
 * **Konsep OOP**:
   - Inheritance<br>
-    PlatesCounter mewarisi kelas BaseCounter. Dengan pewarisan ini, PlatesCounter mendapatkan metode Interact dari BaseCounter, yang kemudian ditimpa dengan implementasi khusus untuk spawn dan pengambilan piring.
+    `PlatesCounter` mewarisi kelas `BaseCounter`. Dengan pewarisan ini, `PlatesCounter` mendapatkan metode `Interact` dari `BaseCounter`, yang kemudian ditimpa dengan implementasi khusus untuk spawn dan pengambilan piring.
     ```
     public class PlatesCounter : BaseCounter
     ```
   - Encapsulation<br>
-    Variabel seperti platesSpawnedAmount, spawnPlateTimer, dan spawnPlateTimerMax dienkapsulasi di dalam kelas dan tidak diakses langsung dari luar. Mereka dikelola secara internal untuk mengontrol logika spawn dan jumlah maksimum piring yang dihasilkan.
+    Variabel seperti `platesSpawnedAmount, spawnPlateTimer, dan spawnPlateTimerMax` dienkapsulasi di dalam kelas dan tidak diakses langsung dari luar. Mereka dikelola secara internal untuk mengontrol logika spawn dan jumlah maksimum piring yang dihasilkan.
     ```
     private float spawnPlateTimer;
     private float spawnPlateTimerMax = 4f;
@@ -367,7 +371,7 @@ achievementManager.EvaluateAchievements(currentSession);
     private int platesSpawnedAmountMax = 4;
     ```
   - Polymorphism<br>
-    Metode Interact dari kelas induk BaseCounter ditimpa (overridden) untuk menangani interaksi khusus, yaitu pengambilan piring oleh pemain. Implementasi ini memungkinkan PlatesCounter memiliki perilaku unik dibandingkan kelas lain yang juga mewarisi BaseCounter.
+    Metode `Interact` dari kelas induk `BaseCounter` ditimpa (overridden) untuk menangani interaksi khusus, yaitu pengambilan piring oleh pemain. Implementasi ini memungkinkan PlatesCounter memiliki perilaku unik dibandingkan kelas lain yang juga mewarisi `BaseCounter`.
     ```
     public override void Interact(Player player)
     {
@@ -411,20 +415,25 @@ achievementManager.EvaluateAchievements(currentSession);
 3. [Langkah n]
 
 ## 7. Kendala dan Solusi
-1. **Kendala 1**: Waktu Final Project bertabrakan dengan berbagai tugas final dan juga EAS matakuliah
-    * Solusi: Mengatur waktu sebaik mungkin
-2. **Kendala 2**: Kurangnya pengalaman membuat game dan penggunaan game engine
-   * Solusi: Mencari di internet.
+1. **Kendala 1**: Waktu pengerjaan Final Project bertabrakan dengan berbagai tugas akhir lainnya serta Ujian Akhir Semester (EAS) beberapa mata kuliah.
+    * Solusi: Mengatur waktu sebaik mungkin <br>
+2. **Kendala 2**: Kurangnya pengalaman dalam pembuatan game dan penggunaan game engine.
+   * Solusi: Untuk mengatasi kendala ini, kami memanfaatkan berbagai sumber yang tersedia di internet.
 
 ## 8. Kesimpulan dan Pembelajaran
-* **Kesimpulan**:
-  Kami berhasil menyelesaikan proyek Game bertema memasak yang kami beri nama Gosong Cooking. Dalam pengembangannya, kami telah menerapkan berbagai konsep pemrograman berbasis objek (OOP) dan prinsip-prinsip desain perangkat lunak SOLID. Proyek ini memberikan sebuah tantangan teknis, dan juga sebuah perjalanan yang meningkatkan pemahaman kami dalam bidang Pemrograman Berbasis Objek khususnya.
+* **Kesimpulan**:<br>
+  Kami berhasil menyelesaikan proyek Game bertema memasak yang kami beri nama Gosong Cooking. Dalam pengembangannya, kami telah menerapkan berbagai konsep pemrograman berbasis objek (OOP) dan prinsip-prinsip 
+  desain perangkat lunak SOLID. Proyek ini memberikan sebuah tantangan teknis, dan juga sebuah perjalanan yang meningkatkan pemahaman kami dalam bidang Pemrograman Berbasis Objek khususnya.
   
-Meskipun tidak lepas dari berbagai kendala dan tantangan, seperti pengelolaan waktu yang kurang optimal serta beberapa hambatan teknis yang harus dihadapi, kami merasa bangga dengan hasil yang telah dicapai (walaupun dirasa belum maksimal). Kendala-kendala tersebut justru menjadi bagian penting dari proses belajar, mendorong kami untuk berpikir kritis dan mencari solusi yang kreatif.
+  Meskipun tidak lepas dari berbagai kendala dan tantangan, seperti pengelolaan waktu yang kurang optimal serta beberapa hambatan teknis yang harus dihadapi, kami merasa bangga dengan hasil yang telah dicapai 
+  (walaupun dirasa belum maksimal). Kendala-kendala tersebut justru menjadi bagian penting dari proses belajar, mendorong kami untuk berpikir kritis dan mencari solusi yang kreatif.
 
-* **Pembelajaran**:
-  Salah satu pelajaran berharga yang kami peroleh dari pengalaman ini adalah pentingnya manajemen waktu yang baik. Kami menyadari bahwa mengerjakan proyek dengan jadwal yang mepet dapat memengaruhi kualitas akhir yang dihasilkan. Oleh karena itu, ke depannya kami akan belajar untuk merencanakan waktu dengan lebih matang agar setiap tugas dapat diselesaikan dengan lebih baik dan tanpa tekanan yang berlebihan. Dengan persiapan yang lebih baik, kami yakin hasil yang akan kami capai di masa depan dapat jauh lebih maksimal.
+* **Pembelajaran**:<br>
+  Salah satu pelajaran berharga yang kami peroleh dari pengalaman ini adalah pentingnya manajemen waktu yang baik. Kami menyadari bahwa mengerjakan proyek dengan jadwal yang mepet dapat memengaruhi kualitas 
+  akhir yang dihasilkan. Oleh karena itu, ke depannya kami akan belajar untuk merencanakan waktu dengan lebih matang agar setiap tugas dapat diselesaikan dengan lebih baik dan tanpa tekanan yang berlebihan. 
+  Dengan persiapan yang lebih baik, kami yakin hasil yang akan kami capai di masa depan dapat jauh lebih maksimal.
 
-Selain itu, kami juga belajar bagaimana menerapkan prinsip-prinsip desain perangkat lunak seperti SOLID. Penerapan OOP dalam game ini juga mengajarkan kami bagaimana membuat kode yang bersih, terorganisir, dan terstruktur, sehingga lebih mudah dipahami dan dikelola.
+  Selain itu, kami juga belajar bagaimana menerapkan prinsip-prinsip desain perangkat lunak seperti SOLID. Penerapan OOP dalam game ini juga mengajarkan kami bagaimana membuat kode yang bersih, terorganisir, dan 
+  terstruktur, sehingga lebih mudah dipahami dan dikelola.
 
-Kami berharap, dengan semua pengalaman dan pembelajaran yang telah kami peroleh, kami dapat terus berkembang di masa mendatang.
+  Kami berharap, dengan semua pengalaman dan pembelajaran yang telah kami peroleh, kami dapat terus berkembang di masa mendatang.
