@@ -28,7 +28,7 @@ Pemain bertugas untuk memasak hidangan berdasarkan resep yang telah ditentukan. 
 * **Single/Multi Player**: Single Player
 
 ### 2.2 Fitur Utama
-1. Cooking (Cutting, Frying)
+1. Cooking (Cutting, Frying and Assembling the Ingredients)
 2. Delivery
 
 ## 3. Implementasi Fitur Wajib
