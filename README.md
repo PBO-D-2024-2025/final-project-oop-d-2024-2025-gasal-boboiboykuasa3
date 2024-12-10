@@ -574,7 +574,7 @@ public class AchievementUI : MonoBehaviour
 ## 6. Panduan Instalasi dan Menjalankan Game
 1. Download File Zip melalui link diatas
 2. Setelah itu extract filenya
-3. Masuk kedalam folder `GosongCooking` dan cari file GosongCooking.exe
+3. Masuk kedalam folder `GosongCooking` dan cari file `GosongCooking.exe`
 4. Kemudian Double Click
 5. Game akan berjalan
 
