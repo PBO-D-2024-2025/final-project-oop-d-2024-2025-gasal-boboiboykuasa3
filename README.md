@@ -540,6 +540,29 @@ public class AchievementUI : MonoBehaviour
     `PlatesCounter` bertanggung jawab mengelola logika pemunculan dan pengambilan piring, tanpa mencampurkan fungsionalitas lain seperti memasak atau penyajian.
   - **Open/Closed Principle (OCP):**
     Sistem ini dapat diperluas, misalnya dengan menambahkan variasi jenis piring yang dihasilkan melalui pengaturan `KitchenObjectSO`, tanpa memodifikasi kode inti.
+
+
+### 4.5 Fitur 5
+* **Implementasi**: Plate Spawning
+* **Konsep OOP**:
+  - Inheritance <br>
+    Kelas `ContainerCounter` mewarisi `BaseCounter`, memungkinkan untuk menggunakan metode dan properti dari kelas induk seperti `Interact`.
+    ```
+    public class ContainerCounter : BaseCounter
+    ```
+  - Polymorphism <br>
+    Metode `Interact` dari `BaseCounter` ditimpa `(overridden)` untuk memberikan logika spesifik bagi `ContainerCounter`. Ketika pemain berinteraksi, objek akan "diberikan" ke pemain jika        pemain tidak memegang objek apapun.
+    ```
+    public override void Interact(Player player)
+    {
+        if (!player.HasKitchenObject())
+        {
+            KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);
+            OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    ```
+
 ## 5. Screenshot dan Demo
 * **Screenshot 1**: Main Menu <br>
 ![WhatsApp Image 2024-12-10 at 23 16 04_5f9a0434](https://github.com/user-attachments/assets/335370b4-fe10-4b3e-9435-eb4aaf98a680)
