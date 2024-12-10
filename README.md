@@ -50,7 +50,7 @@
         gameObject.SetActive(false);
     }
     ```
- - Abstraction <br>
+  - Abstraction <br>
    Kelas ini menyembunyikan logika bagaimana data skor saat ini (currentScore) diperoleh dari DeliveryManager atau bagaimana skor tertinggi dikelola menggunakan PlayerPrefs. Pengembang hanya berinteraksi dengan     kelas ini melalui event KitchenGameManager_OnStateChanged.
    ```
     int currentScore = DeliveryManager.Instance.GetSuccessfulRecipesAmount();
@@ -194,7 +194,7 @@ achievementManager.EvaluateAchievements(currentSession);
     private int cuttingProgress;
     ```
 
- - Polymorphism<br>
+  - Polymorphism<br>
    Kelas ini menimpa metode Interact dan InteractAlternate dari kelas induk BaseCounter, menunjukkan overriding. Ini memungkinkan perilaku yang berbeda untuk metode yang sama di kelas anak.
    ```
     public override void Interact(Player player)
@@ -209,7 +209,7 @@ achievementManager.EvaluateAchievements(currentSession);
 
    ```
 
-- Abstraction<br>
+ - Abstraction<br>
   Kelas ini menyembunyikan detail implementasi dari logika kompleks, seperti logika untuk memeriksa resep (HasRecipeWithInput) dan mendapatkan output resep (GetOutputForInput).
   ```
   private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
