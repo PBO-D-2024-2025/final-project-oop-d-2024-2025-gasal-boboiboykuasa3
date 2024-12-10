@@ -73,7 +73,6 @@
     Kelas ini hanya bertanggung jawab untuk mengatur tampilan layar akhir permainan. Hal ini mencakup menampilkan skor saat ini dan skor tertinggi, serta mengatur visibilitas layar.
     Logika penghitungan skor dan manajemen state game ditangani oleh `DeliveryManager` dan `KitchenGameManager`.
   
-* **Design Pattern yang Digunakan**:
 * **Code Snippet**:
 ```
 using System.Collections;
@@ -149,7 +148,6 @@ public class GameOverUI : MonoBehaviour
   <br>**Liskov Substitution Principle (LSP)**: Any specific achievement class (e.g., HighScoreHardLevel) can replace the Achievement base class without affecting the AchievementManager.c
   <br>**Interface Segregation Principle (ISP)**: If you were to have separate interfaces for achievements based on score, multiplayer, etc., you would implement only relevant interfaces.
   <br>**Dependency Inversion Principle (DIP)**: The AchievementManager depends on abstractions (the Achievement class) rather than concrete implementations, allowing flexibility.
-* **Design Pattern yang Digunakan**:
 * **Code Snippet**:
 ```
 public class HighScoreHardLevel : Achievement
