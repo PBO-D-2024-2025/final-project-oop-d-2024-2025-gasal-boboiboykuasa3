@@ -15,12 +15,10 @@
 * **Genre**: Cooking
 * **Gameplay/Rule**: <br>
 
-  The game offers **Single Player**
- <br> In **Single Player**, players choose a difficulty level (Easy, Medium, or Hard), which determines recipe complexity and time limits. <br>
+  The game offers **Single Player** mode.
 <br>**Scoring:** Points are awarded based on the number of dishes completed. <br>
 <br>**Recipe System:** <br>
     Each dish has a recipe that includes specific ingredients and steps (e.g., chopped vegetables, fried meat, boiled pasta).
-Different difficulty levels could introduce more complex recipes <br>
 
 * **Objective**: Cook as much dishes as possible based on the given recipe until the time is up. <br>
 
@@ -34,7 +32,7 @@ Different difficulty levels could introduce more complex recipes <br>
 
 ### 3.1 Save/Load System
 * **Implementasi**:
-  Save highest score on each difficulty
+  Save highest score that the player gets
 * **Konsep OOP**:<br>
   **Encapsulation**: The high scores for each difficulty level are stored within the **GameData** class, keeping this data private and only accessible through specific methods.
 * **Penerapan SOLID**:<br>
@@ -127,24 +125,226 @@ achievementManager.EvaluateAchievements(currentSession);
 ## 4. Implementasi Fitur Lain
 
 ### 4.1 Fitur
-* **Implementasi**: Recipe List
+* **Implementasi**: Cutting 
 * **Konsep OOP**:
-* **Penerapan SOLID (Optional)**:
-* **Design Pattern yang Digunakan (Optional)**:
-* **Code Snippet**:
-```
-[Code snippet here]
-```
+  - Inheritance
+    Kelas CuttingCounter mewarisi dari BaseCounter. Pewarisan memungkinkan kelas anak (CuttingCounter) untuk menggunakan atau menimpa properti dan metode dari kelas induk (BaseCounter).
+    ```
+    public class CuttingCounter : BaseCounter, IHasProgress
+    ```
+  - Encapsulation
+    Kode ini menggunakan access modifiers seperti private dan public untuk mengontrol akses terhadap data atau metode. Misalnya:
+    Variabel cuttingRecipeSOArray dienkapsulasi dengan private untuk mencegah akses langsung dari luar kelas.
+    Fungsi HasRecipeWithInput membungkus logika pengecekan resep, sehingga detailnya tidak terlihat di luar kelas.
+    ```
+    [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
+    private int cuttingProgress;
+    ```
+
+ - Polymorphism
+   Kelas ini menimpa metode Interact dan InteractAlternate dari kelas induk BaseCounter, menunjukkan overriding. Ini memungkinkan perilaku yang berbeda untuk metode yang sama di kelas anak.
+   ```
+    public override void Interact(Player player)
+    {
+    
+    }
+    
+    public override void InteractAlternate(Player player)
+    {
+    
+    }
+
+   ```
+
+- Abstraction
+  Kelas ini menyembunyikan detail implementasi dari logika kompleks, seperti logika untuk memeriksa resep (HasRecipeWithInput) dan mendapatkan output resep (GetOutputForInput).
+  ```
+  private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
+    {
+    CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(inputKitchenObjectSO);
+    return cuttingRecipeSO != null;
+    }
+
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
+    {
+    CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(inputKitchenObjectSO);
+    return cuttingRecipeSO != null ? cuttingRecipeSO.output : null;
+    }
+  ```
 
 ### 4.2 Fitur 2
-* **Implementasi**: Pause/Resume
+* **Implementasi**: Throwing Trash
 * **Konsep OOP**:
-* **Penerapan SOLID (Optional)**:
-* **Design Pattern yang Digunakan (Optional)**:
-* **Code Snippet**:
-```
-[Code snippet here]
-```
+  - Inheritance
+    Kelas TrashCounter mewarisi dari BaseCounter, yang memungkinkan TrashCounter untuk menggunakan metode atau properti dari kelas induknya, termasuk metode Interact.
+    ```
+    public class TrashCounter : BaseCounter
+    ```
+  - Abstraction
+    Kelas ini menyembunyikan detail implementasi terkait dengan cara objek dihancurkan (DestroySelf) atau cara event OnAnyObjectTrashed dipanggil. Pemain hanya perlu memanggil Interact, tanpa mengetahui detail       teknis.
+    ```
+    player.GetKitchenObject().DestroySelf();
+    OnAnyObjectTrashed?.Invoke(this, EventArgs.Empty);
+    ```
+  - Encapsulation
+    Data atau logika seperti event OnAnyObjectTrashed dienkapsulasi, sehingga hanya bisa diakses melalui kelas ini. Selain itu, metode ResetStaticData digunakan untuk mengatur ulang event secara aman.
+    ```
+    public static event EventHandler OnAnyObjectTrashed;
+
+    new public static void ResetStaticData()
+    {
+        OnAnyObjectTrashed = null;
+    }
+    ```
+  - Polymorphism
+    Metode Interact dari BaseCounter ditimpa (overridden) untuk memberikan perilaku spesifik bagi TrashCounter, yaitu menghancurkan objek yang dipegang oleh pemain.
+    ```
+    public override void Interact(Player player)
+    {
+    if (player.HasKitchenObject())
+    {
+        player.GetKitchenObject().DestroySelf();
+
+        OnAnyObjectTrashed?.Invoke(this, EventArgs.Empty);
+    }
+    }
+    ```
+### 4.3 Fitur 3
+* **Implementasi**: Delivery
+* **Konsep OOP**:
+  - Encapsulation
+    Properti Instance dienkapsulasi sebagai properti public dengan pengaturan hanya dapat dilakukan secara privat. Hal ini memastikan bahwa hanya satu instance DeliveryCounter yang ada pada waktu tertentu.
+    ```
+    public static DeliveryCounter Instance { get; private set; }
+    ```
+  - Polymorphism
+    Metode Interact dari BaseCounter ditimpa untuk memberikan logika khusus pada DeliveryCounter. Saat pemain berinteraksi, game memeriksa apakah pemain membawa sesuatu, dan jika iya, memproses pengiriman resep.
+    ```
+    public override void Interact(Player player)
+    {
+        if (player.HasKitchenObject())
+        {
+            if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+            {
+                DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
+                player.GetKitchenObject().DestroySelf();
+            }
+        }
+    }
+    ```
+  - Inheritance
+    Kelas DeliveryCounter mewarisi BaseCounter, memungkinkan untuk menggunakan metode dan properti bawaan seperti Interact.
+    ```
+    public class DeliveryCounter : BaseCounter
+    ```
+  - Abstraction
+    Kode ini menyembunyikan detail teknis proses pengiriman resep. Pemain hanya perlu memanggil Interact tanpa mengetahui bagaimana DeliveryManager bekerja.
+    ```
+    DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
+    ```
+
+### 4.4 Fitur 4
+* **Implementasi**: Frying
+* **Konsep OOP**:
+  - Inheritance
+    Kelas StoveCounter mewarisi dari BaseCounter, memungkinkan StoveCounter untuk menggunakan metode atau properti dari kelas induknya, seperti Interact.
+    ```
+    public class StoveCounter : BaseCounter, IHasProgress
+    ```
+  - Encapsulation
+    Kode ini menjaga detail implementasi dengan menggunakan variabel privat (private) dan properti serialized ([SerializeField]) untuk pengelolaan data resep dan state internal.
+    ```
+    [SerializeField] private FryingRecipeSO[] fryingRecipeSOArray;
+    [SerializeField] private BurningRecipeSO[] burningRecipeSOArray;
+    
+    private State state;
+    private float fryingTimer;
+    private float burningTimer;
+    private FryingRecipeSO fryingRecipeSO;
+    private BurningRecipeSO burningRecipeSO;
+    ```
+  - Polymorphism
+    Kelas ini menimpa metode Interact dari BaseCounter untuk memberikan perilaku spesifik saat pemain berinteraksi dengan StoveCounter.
+    ```
+    public override void Interact(Player player)
+    {
+        if (!HasKitchenObject())
+        {
+        }
+        else
+        {
+        }
+    }
+    ```
+ - Abstraction
+   Fungsi seperti HasRecipeWithInput, GetFryingRecipeSOWithInput, dan GetBurningRecipeSOWithInput menyembunyikan detail implementasi terkait pemeriksaan atau pencarian resep, sehingga membuat kode lebih bersih.
+   ```
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
+    {
+        FryingRecipeSO fryingRecipeSO = GetFryingRecipeSOWithInput(inputKitchenObjectSO);
+        return fryingRecipeSO != null;
+    }
+    
+    private FryingRecipeSO GetFryingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
+    {
+        foreach (FryingRecipeSO fryingRecipeSO in fryingRecipeSOArray)
+        {
+            if (fryingRecipeSO.input == inputKitchenObjectSO)
+            {
+                return fryingRecipeSO;
+            }
+        }
+        return null;
+    }
+   ```
+### 4.5 Fitur 5
+* **Implementasi**: Plate Spawning
+* **Konsep OOP**:
+  - Inheritance
+    PlatesCounter mewarisi kelas BaseCounter. Dengan pewarisan ini, PlatesCounter mendapatkan metode Interact dari BaseCounter, yang kemudian ditimpa dengan implementasi khusus untuk spawn dan pengambilan piring.
+    ```
+    public class PlatesCounter : BaseCounter
+    ```
+  - Encapsulation
+    Variabel seperti platesSpawnedAmount, spawnPlateTimer, dan spawnPlateTimerMax dienkapsulasi di dalam kelas dan tidak diakses langsung dari luar. Mereka dikelola secara internal untuk mengontrol logika spawn dan jumlah maksimum piring yang dihasilkan.
+    ```
+    private float spawnPlateTimer;
+    private float spawnPlateTimerMax = 4f;
+    private int platesSpawnedAmount;
+    private int platesSpawnedAmountMax = 4;
+    ```
+  - Polymorphism
+    Metode Interact dari kelas induk BaseCounter ditimpa (overridden) untuk menangani interaksi khusus, yaitu pengambilan piring oleh pemain. Implementasi ini memungkinkan PlatesCounter memiliki perilaku unik dibandingkan kelas lain yang juga mewarisi BaseCounter.
+    ```
+    public override void Interact(Player player)
+    {
+        if (!player.HasKitchenObject())
+        {
+            if (platesSpawnedAmount > 0)
+            {
+                platesSpawnedAmount--;
+                KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, player);
+    
+                OnPlateRemoved?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+
+    ```
+  - Abstraction
+    Detail seperti timer untuk spawn piring dan event handling disembunyikan dari pengguna luar. Pemain hanya berinteraksi dengan Interact, tanpa mengetahui detail bagaimana piring di-spawn atau dihapus.
+    ```
+    spawnPlateTimer += Time.deltaTime;
+    if (spawnPlateTimer > spawnPlateTimerMax)
+    {
+        spawnPlateTimer = 0f;
+        if (platesSpawnedAmount < platesSpawnedAmountMax)
+        {
+            platesSpawnedAmount++;
+            OnPlateSpawned?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    ```
 
 ## 5. Screenshot dan Demo
 * **Screenshot 1**: [Deskripsi]
@@ -152,13 +352,15 @@ achievementManager.EvaluateAchievements(currentSession);
 * **Link Demo Video**: [URL]
 
 ## 6. Panduan Instalasi dan Menjalankan Game
-1. [Langkah 1]
+1. Download folder yang diberikan
 2. [Langkah 2]
 3. [Langkah n]
 
 ## 7. Kendala dan Solusi
 1. **Kendala 1**: Waktu Final Project bertabrakan dengan berbagai tugas final dan juga EAS matakuliah
     * Solusi: Mengatur waktu sebaik mungkin
+2. **Kendala 2**: Kurangnya pengalaman membuat game dan penggunaan game engine
+   * Solusi: Mencari di internet.
 
 ## 8. Kesimpulan dan Pembelajaran
 * **Kesimpulan**:
