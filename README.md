@@ -542,8 +542,8 @@ public class AchievementUI : MonoBehaviour
     Sistem ini dapat diperluas, misalnya dengan menambahkan variasi jenis piring yang dihasilkan melalui pengaturan `KitchenObjectSO`, tanpa memodifikasi kode inti.
 
 
-### 4.5 Fitur 5
-* **Implementasi**: Plate Spawning
+### 4.6 Fitur 6
+* **Implementasi**: Ingredients Spawner
 * **Konsep OOP**:
   - Inheritance <br>
     Kelas `ContainerCounter` mewarisi `BaseCounter`, memungkinkan untuk menggunakan metode dan properti dari kelas induk seperti `Interact`.
